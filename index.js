@@ -5,7 +5,7 @@ const Recipe = require('./models/Recipe.model');
 // Import of the data from './data.json'
 const data = require('./data');
 
-const MONGODB_URI = 'mongodb://localhost:27017/recipe-app';
+const MONGODB_URI = 'mongodb://127.0.0.1/recipe-app';
 
 // Connection to the database "recipe-app"
 mongoose
@@ -16,7 +16,25 @@ mongoose
     return Recipe.deleteMany()
   })
   .then(() => {
-    // Run your code here, after you have insured that the connection was made
+    return Recipe.create({
+      title: "Lasagna",
+      level: "Amateur Chef",
+      ingredients: [
+        "Bolognesa",
+        "Pimiento rojo",
+        "Bacon",
+        "Tomate natural"
+      ],
+      cuisine: "Italian",
+      dishType: "main_course",
+      image: "https://www.recetasdesbieta.com/wp-content/uploads/2018/10/lasagna-original..jpg",
+      duration: 40,
+      creator: "Aaron y Jose Daniel",
+      created: new Date
+    })
+    .then((res) => {
+      console.log(res.title)
+    })
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
