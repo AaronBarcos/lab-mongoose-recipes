@@ -32,9 +32,23 @@ mongoose
       creator: "Aaron y Jose Daniel",
       created: new Date
     })
-    .then((res) => {
-      console.log(res.title)
+  })
+  .then((res) => {
+    console.log(res.title)
+  })
+  .then((res) => {
+    return Recipe.insertMany(data)
+  })
+  .then((res) => {
+    res.forEach(recipe => {
+      console.log(recipe.title)
     })
+  })
+  .then((res) => {
+    return Recipe.findOneAndUpdate({title:"Rigatoni alla Genovese"}, {duration: 100}, {new: true})
+  })
+  .then((res) => {
+    console.log(res)
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
